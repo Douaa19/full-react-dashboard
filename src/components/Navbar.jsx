@@ -6,12 +6,12 @@ import { RiNotification3Line } from "react-icons/ri";
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import avatar from "../data/avatar.jpg";
-import { Cart, Chat, notification, UserProfile } from ".";
+import { Cart, Chat, Notification, UserProfile } from ".";
 import { useStateContext } from '../context/ContextProvider';
 
-const NavButton = ({title, customFunc, icon, color, dotColor}) => {
+const NavButton = ({title, customFunc, icon, color, dotColor}) => (
   <TooltipComponent content={title} position="BottomCenter">
-    <button type="button" onClick={customFunc} style={{color}}
+    <button type="button" onClick={() => customFunc()} style={{color}}
     className="relative text-xl rounded-full p-3
     hover:bg-light-gray"
     >
@@ -22,13 +22,13 @@ const NavButton = ({title, customFunc, icon, color, dotColor}) => {
       </span>
     </button>
   </TooltipComponent>
-}
+);
 
 const Navbar = () => {
   const { activeMenu, setActiveMenu } = useStateContext();
 
   return (
-    <div className="flex justify-between p-2 md:mx-6 relative">
+    <div className="flex justify-between p-2 md:ml-6 md:mr-6 relative">
       <NavButton title="Menu" customFunc={() => setActiveMenu((prevActiveMenu) => !prevActiveMenu)} color="blue" icon={<AiOutlineMenu />} />
     </div>
   )
