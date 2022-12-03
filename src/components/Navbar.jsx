@@ -25,13 +25,62 @@ const NavButton = ({title, customFunc, icon, color, dotColor}) => (
 );
 
 const Navbar = () => {
-  const { activeMenu, setActiveMenu } = useStateContext();
+  const { activeMenu, setActiveMenu, handleClick, setClicked, isClicked } = useStateContext();
 
   return (
     <div className="flex justify-between p-2 md:ml-6 md:mr-6 relative">
-      <NavButton title="Menu" customFunc={() => setActiveMenu((prevActiveMenu) => !prevActiveMenu)} color="blue" icon={<AiOutlineMenu />} />
+      <NavButton
+        title="Menu" 
+        customFunc={() => setActiveMenu((prevActiveMenu) => !prevActiveMenu)} 
+        color="blue" 
+        icon={<AiOutlineMenu />}
+      />
+
+      <div className='flex'>
+        <NavButton 
+          title="Cart" 
+          customFunc={() => handleClick('cart')} 
+          color="blue" 
+          icon={<FiShoppingCart />} 
+        />
+        <NavButton 
+          title="Chat" 
+          customFunc={() => handleClick('chat')} 
+          dotColor="#03C9D7" 
+          icon={<BsChatLeft />} 
+        />
+        <NavButton 
+          title="Notifications" 
+          customFunc={() => handleClick('notification')} 
+          dotColor="#03C9D7" 
+          icon={<RiNotification3Line />} 
+        />
+        <TooltipComponent
+        content="Profile"
+        position="BottomCenter"
+        >
+          <div className='flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg'
+          onClick={() => handleClick('userProfile')}>
+            <img 
+            src={avatar}
+            alt=""
+            className='rounded-full w-8 h-8'/>
+            <p>
+              <span className='text-gray-400 text-14'>Hi, </span> { ' '}
+              <span className='text-gray-400 font-bold ml-1 text-14'>Mohammed</span>
+            </p>
+            <MdKeyboardArrowDown className='text-gray-400 text-14' />
+          </div>
+        </TooltipComponent>
+
+        {isClicked.cart && <Cart />}
+        {isClicked.chat && <Chat />}
+        {isClicked.notification && <Notification />}
+        {isClicked.userProfile && <UserProfile />}
+      </div>
     </div>
   )
 }
+// Z0oB1kh7
 
 export default Navbar
